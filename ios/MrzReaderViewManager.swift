@@ -1,36 +1,31 @@
+import Foundation
+import AVFoundation
+
 @objc(MrzReaderViewManager)
 class MrzReaderViewManager: RCTViewManager {
-
-  override func view() -> (MrzReaderView) {
-    return MrzReaderView()
-  }
-
-  @objc override static func requiresMainQueueSetup() -> Bool {
-    return false
-  }
+    
+    override func view() -> (MrzReaderView) {
+        return MrzReaderView()
+    }
+    
+    @objc override static func requiresMainQueueSetup() -> Bool {
+        return false
+    }
+    
+    @objc
+    final func getCameraPermissionStatus(_ resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
+        withPromise(resolve: resolve, reject: reject) {
+            let status = AVCaptureDevice.authorizationStatus(for: .video)
+            return status.descriptor
+        }
+    }
+    
+    @objc
+    final func requestCameraPermission(_ resolve: @escaping RCTPromiseResolveBlock, reject _: @escaping RCTPromiseRejectBlock) {
+        AVCaptureDevice.requestAccess(for: .video) { granted in
+            let result: AVAuthorizationStatus = granted ? .authorized : .denied
+            resolve(result.descriptor)
+        }
+    }
 }
 
-class MrzReaderView : UIView {
-
-  @objc var color: String = "" {
-    didSet {
-      self.backgroundColor = hexStringToUIColor(hexColor: color)
-    }
-  }
-
-  func hexStringToUIColor(hexColor: String) -> UIColor {
-    let stringScanner = Scanner(string: hexColor)
-
-    if(hexColor.hasPrefix("#")) {
-      stringScanner.scanLocation = 1
-    }
-    var color: UInt32 = 0
-    stringScanner.scanHexInt32(&color)
-
-    let r = CGFloat(Int(color >> 16) & 0x000000FF)
-    let g = CGFloat(Int(color >> 8) & 0x000000FF)
-    let b = CGFloat(Int(color) & 0x000000FF)
-
-    return UIColor(red: r / 255.0, green: g / 255.0, blue: b / 255.0, alpha: 1)
-  }
-}

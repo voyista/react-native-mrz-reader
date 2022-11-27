@@ -7,8 +7,36 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5E555C0D2413F4C50049A1A2 /* MrzReader.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* MrzReader.m */; };
-		F4FF95D7245B92E800C19C63 /*  MrzReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FF95D6245B92E800C19C63 /*  MrzReader.swift */; };
+		5534C5C9293033660061AFC1 /* CIContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5534C5C5293033660061AFC1 /* CIContext.swift */; };
+		5534C5CA293033660061AFC1 /* CIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5534C5C6293033660061AFC1 /* CIImage.swift */; };
+		5534C5CB293033660061AFC1 /* CVImageBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5534C5C7293033660061AFC1 /* CVImageBuffer.swift */; };
+		5534C5CC293033660061AFC1 /* AVCaptureVideoOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5534C5C8293033660061AFC1 /* AVCaptureVideoOrientation.swift */; };
+		5534C5CF293033990061AFC1 /* LuminanceThresholdFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5534C5CD293033990061AFC1 /* LuminanceThresholdFilter.swift */; };
+		5534C5D0293033990061AFC1 /* QKCutoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5534C5CE293033990061AFC1 /* QKCutoutView.swift */; };
+		5534C5D2293033A50061AFC1 /* MRZScanResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5534C5D1293033A50061AFC1 /* MRZScanResult.swift */; };
+		5534C5D429303E4A0061AFC1 /* MrzReaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5534C5D329303E4A0061AFC1 /* MrzReaderView.swift */; };
+		5534C5D62930415F0061AFC1 /* CameraError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5534C5D52930415F0061AFC1 /* CameraError.swift */; };
+		5534C5D9293041EF0061AFC1 /* ReactLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5534C5D8293041EF0061AFC1 /* ReactLogger.swift */; };
+		5534C5DB293041F90061AFC1 /* Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5534C5DA293041F90061AFC1 /* Promise.swift */; };
+		5534C5DD293042040061AFC1 /* Callback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5534C5DC293042040061AFC1 /* Callback.swift */; };
+		5534C5EE2930435B0061AFC1 /* UIInterfaceOrientation+descriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5534C5DF2930435A0061AFC1 /* UIInterfaceOrientation+descriptor.swift */; };
+		5534C5EF2930435B0061AFC1 /* EnumParserError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5534C5E02930435A0061AFC1 /* EnumParserError.swift */; };
+		5534C5F02930435B0061AFC1 /* AVCaptureVideoStabilizationMode+descriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5534C5E12930435A0061AFC1 /* AVCaptureVideoStabilizationMode+descriptor.swift */; };
+		5534C5F12930435B0061AFC1 /* AVVideoCodecType+descriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5534C5E22930435A0061AFC1 /* AVVideoCodecType+descriptor.swift */; };
+		5534C5F22930435B0061AFC1 /* AVCaptureSession.Preset+descriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5534C5E32930435A0061AFC1 /* AVCaptureSession.Preset+descriptor.swift */; };
+		5534C5F32930435B0061AFC1 /* AVAssetWriter.Status+descriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5534C5E42930435A0061AFC1 /* AVAssetWriter.Status+descriptor.swift */; };
+		5534C5F42930435B0061AFC1 /* AVCaptureDevice.TorchMode+descriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5534C5E52930435A0061AFC1 /* AVCaptureDevice.TorchMode+descriptor.swift */; };
+		5534C5F52930435B0061AFC1 /* AVCapturePhotoOutput.QualityPrioritization+descriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5534C5E62930435A0061AFC1 /* AVCapturePhotoOutput.QualityPrioritization+descriptor.swift */; };
+		5534C5F62930435B0061AFC1 /* AVCaptureDevice.DeviceType+descriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5534C5E72930435A0061AFC1 /* AVCaptureDevice.DeviceType+descriptor.swift */; };
+		5534C5F72930435B0061AFC1 /* AVAuthorizationStatus+descriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5534C5E82930435A0061AFC1 /* AVAuthorizationStatus+descriptor.swift */; };
+		5534C5F82930435B0061AFC1 /* AVCaptureDevice.Position+descriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5534C5E92930435A0061AFC1 /* AVCaptureDevice.Position+descriptor.swift */; };
+		5534C5F92930435B0061AFC1 /* AVCaptureColorSpace+descriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5534C5EA2930435B0061AFC1 /* AVCaptureColorSpace+descriptor.swift */; };
+		5534C5FA2930435B0061AFC1 /* AVCaptureDevice.FlashMode+descriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5534C5EB2930435B0061AFC1 /* AVCaptureDevice.FlashMode+descriptor.swift */; };
+		5534C5FB2930435B0061AFC1 /* AVFileType+descriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5534C5EC2930435B0061AFC1 /* AVFileType+descriptor.swift */; };
+		5534C5FC2930435B0061AFC1 /* AVCaptureDevice.Format.AutoFocusSystem+descriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5534C5ED2930435B0061AFC1 /* AVCaptureDevice.Format.AutoFocusSystem+descriptor.swift */; };
+		5534C5FE293051FD0061AFC1 /* MakeReactError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5534C5FD293051FD0061AFC1 /* MakeReactError.swift */; };
+		5534C6002930FF510061AFC1 /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5534C5FF2930FF510061AFC1 /* PreviewView.swift */; };
+		F4FF95D7245B92E800C19C63 /* MrzReaderViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FF95D6245B92E800C19C63 /* MrzReaderViewManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,9 +53,38 @@
 
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libMrzReader.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMrzReader.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		B3E7B5891CC2AC0600A0062D /* MrzReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MrzReader.m; sourceTree = "<group>"; };
+		5534C5C5293033660061AFC1 /* CIContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIContext.swift; sourceTree = "<group>"; };
+		5534C5C6293033660061AFC1 /* CIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIImage.swift; sourceTree = "<group>"; };
+		5534C5C7293033660061AFC1 /* CVImageBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVImageBuffer.swift; sourceTree = "<group>"; };
+		5534C5C8293033660061AFC1 /* AVCaptureVideoOrientation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVCaptureVideoOrientation.swift; sourceTree = "<group>"; };
+		5534C5CD293033990061AFC1 /* LuminanceThresholdFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LuminanceThresholdFilter.swift; sourceTree = "<group>"; };
+		5534C5CE293033990061AFC1 /* QKCutoutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QKCutoutView.swift; sourceTree = "<group>"; };
+		5534C5D1293033A50061AFC1 /* MRZScanResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MRZScanResult.swift; sourceTree = "<group>"; };
+		5534C5D329303E4A0061AFC1 /* MrzReaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MrzReaderView.swift; sourceTree = "<group>"; };
+		5534C5D52930415F0061AFC1 /* CameraError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraError.swift; sourceTree = "<group>"; };
+		5534C5D8293041EF0061AFC1 /* ReactLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReactLogger.swift; sourceTree = "<group>"; };
+		5534C5DA293041F90061AFC1 /* Promise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Promise.swift; sourceTree = "<group>"; };
+		5534C5DC293042040061AFC1 /* Callback.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Callback.swift; sourceTree = "<group>"; };
+		5534C5DF2930435A0061AFC1 /* UIInterfaceOrientation+descriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIInterfaceOrientation+descriptor.swift"; sourceTree = "<group>"; };
+		5534C5E02930435A0061AFC1 /* EnumParserError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnumParserError.swift; sourceTree = "<group>"; };
+		5534C5E12930435A0061AFC1 /* AVCaptureVideoStabilizationMode+descriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AVCaptureVideoStabilizationMode+descriptor.swift"; sourceTree = "<group>"; };
+		5534C5E22930435A0061AFC1 /* AVVideoCodecType+descriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AVVideoCodecType+descriptor.swift"; sourceTree = "<group>"; };
+		5534C5E32930435A0061AFC1 /* AVCaptureSession.Preset+descriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AVCaptureSession.Preset+descriptor.swift"; sourceTree = "<group>"; };
+		5534C5E42930435A0061AFC1 /* AVAssetWriter.Status+descriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AVAssetWriter.Status+descriptor.swift"; sourceTree = "<group>"; };
+		5534C5E52930435A0061AFC1 /* AVCaptureDevice.TorchMode+descriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AVCaptureDevice.TorchMode+descriptor.swift"; sourceTree = "<group>"; };
+		5534C5E62930435A0061AFC1 /* AVCapturePhotoOutput.QualityPrioritization+descriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AVCapturePhotoOutput.QualityPrioritization+descriptor.swift"; sourceTree = "<group>"; };
+		5534C5E72930435A0061AFC1 /* AVCaptureDevice.DeviceType+descriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AVCaptureDevice.DeviceType+descriptor.swift"; sourceTree = "<group>"; };
+		5534C5E82930435A0061AFC1 /* AVAuthorizationStatus+descriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AVAuthorizationStatus+descriptor.swift"; sourceTree = "<group>"; };
+		5534C5E92930435A0061AFC1 /* AVCaptureDevice.Position+descriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AVCaptureDevice.Position+descriptor.swift"; sourceTree = "<group>"; };
+		5534C5EA2930435B0061AFC1 /* AVCaptureColorSpace+descriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AVCaptureColorSpace+descriptor.swift"; sourceTree = "<group>"; };
+		5534C5EB2930435B0061AFC1 /* AVCaptureDevice.FlashMode+descriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AVCaptureDevice.FlashMode+descriptor.swift"; sourceTree = "<group>"; };
+		5534C5EC2930435B0061AFC1 /* AVFileType+descriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AVFileType+descriptor.swift"; sourceTree = "<group>"; };
+		5534C5ED2930435B0061AFC1 /* AVCaptureDevice.Format.AutoFocusSystem+descriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AVCaptureDevice.Format.AutoFocusSystem+descriptor.swift"; sourceTree = "<group>"; };
+		5534C5FD293051FD0061AFC1 /* MakeReactError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeReactError.swift; sourceTree = "<group>"; };
+		5534C5FF2930FF510061AFC1 /* PreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
+		B3E7B5891CC2AC0600A0062D /* MrzReaderViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MrzReaderViewManager.m; sourceTree = "<group>"; };
 		F4FF95D5245B92E700C19C63 /* MrzReader-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MrzReader-Bridging-Header.h"; sourceTree = "<group>"; };
-		F4FF95D6245B92E800C19C63 /* MrzReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MrzReader.swift; sourceTree = "<group>"; };
+		F4FF95D6245B92E800C19C63 /* MrzReaderViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MrzReaderViewManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,11 +106,64 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		5534C5C4293033660061AFC1 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				5534C5C5293033660061AFC1 /* CIContext.swift */,
+				5534C5C6293033660061AFC1 /* CIImage.swift */,
+				5534C5C7293033660061AFC1 /* CVImageBuffer.swift */,
+				5534C5C8293033660061AFC1 /* AVCaptureVideoOrientation.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		5534C5D7293041CB0061AFC1 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				5534C5DC293042040061AFC1 /* Callback.swift */,
+				5534C5DA293041F90061AFC1 /* Promise.swift */,
+				5534C5D8293041EF0061AFC1 /* ReactLogger.swift */,
+				5534C5FD293051FD0061AFC1 /* MakeReactError.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		5534C5DE2930435A0061AFC1 /* Parsers */ = {
+			isa = PBXGroup;
+			children = (
+				5534C5DF2930435A0061AFC1 /* UIInterfaceOrientation+descriptor.swift */,
+				5534C5E02930435A0061AFC1 /* EnumParserError.swift */,
+				5534C5E12930435A0061AFC1 /* AVCaptureVideoStabilizationMode+descriptor.swift */,
+				5534C5E22930435A0061AFC1 /* AVVideoCodecType+descriptor.swift */,
+				5534C5E32930435A0061AFC1 /* AVCaptureSession.Preset+descriptor.swift */,
+				5534C5E42930435A0061AFC1 /* AVAssetWriter.Status+descriptor.swift */,
+				5534C5E52930435A0061AFC1 /* AVCaptureDevice.TorchMode+descriptor.swift */,
+				5534C5E62930435A0061AFC1 /* AVCapturePhotoOutput.QualityPrioritization+descriptor.swift */,
+				5534C5E72930435A0061AFC1 /* AVCaptureDevice.DeviceType+descriptor.swift */,
+				5534C5E82930435A0061AFC1 /* AVAuthorizationStatus+descriptor.swift */,
+				5534C5E92930435A0061AFC1 /* AVCaptureDevice.Position+descriptor.swift */,
+				5534C5EA2930435B0061AFC1 /* AVCaptureColorSpace+descriptor.swift */,
+				5534C5EB2930435B0061AFC1 /* AVCaptureDevice.FlashMode+descriptor.swift */,
+				5534C5EC2930435B0061AFC1 /* AVFileType+descriptor.swift */,
+				5534C5ED2930435B0061AFC1 /* AVCaptureDevice.Format.AutoFocusSystem+descriptor.swift */,
+			);
+			path = Parsers;
+			sourceTree = "<group>";
+		};
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
-				F4FF95D6245B92E800C19C63 /* MrzReader.swift */,
-				B3E7B5891CC2AC0600A0062D /* MrzReader.m */,
+				5534C5FF2930FF510061AFC1 /* PreviewView.swift */,
+				5534C5DE2930435A0061AFC1 /* Parsers */,
+				5534C5D7293041CB0061AFC1 /* Utils */,
+				5534C5D329303E4A0061AFC1 /* MrzReaderView.swift */,
+				5534C5CD293033990061AFC1 /* LuminanceThresholdFilter.swift */,
+				5534C5D52930415F0061AFC1 /* CameraError.swift */,
+				5534C5CE293033990061AFC1 /* QKCutoutView.swift */,
+				5534C5D1293033A50061AFC1 /* MRZScanResult.swift */,
+				F4FF95D6245B92E800C19C63 /* MrzReaderViewManager.swift */,
+				5534C5C4293033660061AFC1 /* Extensions */,
+				B3E7B5891CC2AC0600A0062D /* MrzReaderViewManager.m */,
 				F4FF95D5245B92E700C19C63 /* MrzReader-Bridging-Header.h */,
 				134814211AA4EA7D00B7C361 /* Products */,
 			);
@@ -116,8 +226,36 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F4FF95D7245B92E800C19C63 /* MrzReader.swift in Sources */,
-				B3E7B58A1CC2AC0600A0062D /* MrzReader.m in Sources */,
+				5534C5CF293033990061AFC1 /* LuminanceThresholdFilter.swift in Sources */,
+				5534C5EE2930435B0061AFC1 /* UIInterfaceOrientation+descriptor.swift in Sources */,
+				5534C5FC2930435B0061AFC1 /* AVCaptureDevice.Format.AutoFocusSystem+descriptor.swift in Sources */,
+				5534C5FB2930435B0061AFC1 /* AVFileType+descriptor.swift in Sources */,
+				5534C5D62930415F0061AFC1 /* CameraError.swift in Sources */,
+				5534C6002930FF510061AFC1 /* PreviewView.swift in Sources */,
+				5534C5F62930435B0061AFC1 /* AVCaptureDevice.DeviceType+descriptor.swift in Sources */,
+				5534C5D2293033A50061AFC1 /* MRZScanResult.swift in Sources */,
+				5534C5FA2930435B0061AFC1 /* AVCaptureDevice.FlashMode+descriptor.swift in Sources */,
+				5534C5D9293041EF0061AFC1 /* ReactLogger.swift in Sources */,
+				5534C5D429303E4A0061AFC1 /* MrzReaderView.swift in Sources */,
+				5534C5CC293033660061AFC1 /* AVCaptureVideoOrientation.swift in Sources */,
+				5534C5F22930435B0061AFC1 /* AVCaptureSession.Preset+descriptor.swift in Sources */,
+				5534C5CB293033660061AFC1 /* CVImageBuffer.swift in Sources */,
+				5534C5F52930435B0061AFC1 /* AVCapturePhotoOutput.QualityPrioritization+descriptor.swift in Sources */,
+				5534C5F42930435B0061AFC1 /* AVCaptureDevice.TorchMode+descriptor.swift in Sources */,
+				5534C5F82930435B0061AFC1 /* AVCaptureDevice.Position+descriptor.swift in Sources */,
+				5534C5F32930435B0061AFC1 /* AVAssetWriter.Status+descriptor.swift in Sources */,
+				F4FF95D7245B92E800C19C63 /* MrzReaderViewManager.swift in Sources */,
+				5534C5F12930435B0061AFC1 /* AVVideoCodecType+descriptor.swift in Sources */,
+				5534C5F02930435B0061AFC1 /* AVCaptureVideoStabilizationMode+descriptor.swift in Sources */,
+				5534C5D0293033990061AFC1 /* QKCutoutView.swift in Sources */,
+				5534C5F72930435B0061AFC1 /* AVAuthorizationStatus+descriptor.swift in Sources */,
+				5534C5DD293042040061AFC1 /* Callback.swift in Sources */,
+				5534C5CA293033660061AFC1 /* CIImage.swift in Sources */,
+				5534C5F92930435B0061AFC1 /* AVCaptureColorSpace+descriptor.swift in Sources */,
+				5534C5C9293033660061AFC1 /* CIContext.swift in Sources */,
+				5534C5FE293051FD0061AFC1 /* MakeReactError.swift in Sources */,
+				5534C5DB293041F90061AFC1 /* Promise.swift in Sources */,
+				5534C5EF2930435B0061AFC1 /* EnumParserError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

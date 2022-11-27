@@ -2,7 +2,7 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "react-native-mrz-reader": ["./src/index"]
+      "@better-network/react-native-mrz-reader": ["./src/index"]
     },
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
