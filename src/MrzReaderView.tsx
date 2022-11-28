@@ -2,12 +2,17 @@ import React from 'react';
 import {
   NativeMethods,
   NativeModules,
+  NativeSyntheticEvent,
   requireNativeComponent,
 } from 'react-native';
 import { tryParseNativeCameraError } from './CameraError';
 import type { MrzReaderProps } from './MrzReaderProps';
+import type { MrzResult } from './MrzResult';
 
-type RefType = React.Component<MrzReaderProps> & Readonly<NativeMethods>;
+type NativeMrzReaderProps = Omit<MrzReaderProps, 'onMrzResult'> & {
+  onMrzResult: (event: NativeSyntheticEvent<MrzResult>) => void;
+};
+type RefType = React.Component<NativeMrzReaderProps> & Readonly<NativeMethods>;
 export type CameraPermissionStatus =
   | 'authorized'
   | 'not-determined'
@@ -30,6 +35,7 @@ export class MrzReaderView extends React.PureComponent<MrzReaderProps> {
   constructor(props: MrzReaderProps) {
     super(props);
     this.ref = React.createRef<RefType>();
+    this.onMrzResult = this.onMrzResult.bind(this);
   }
 
   /**
@@ -63,12 +69,23 @@ export class MrzReaderView extends React.PureComponent<MrzReaderProps> {
     }
   }
 
+  private onMrzResult(event: NativeSyntheticEvent<MrzResult>): void {
+    if (this.props.onMrzResult != null)
+      this.props.onMrzResult(event.nativeEvent);
+  }
+
   /** @internal */
   public render(): React.ReactNode {
     const { ...props } = this.props;
-    return <NativeMrzReaderView {...props} ref={this.ref} />;
+    return (
+      <NativeMrzReaderView
+        {...props}
+        ref={this.ref}
+        onMrzResult={this.onMrzResult}
+      />
+    );
   }
 }
 
 const NativeMrzReaderView =
-  requireNativeComponent<MrzReaderProps>(ComponentName);
+  requireNativeComponent<NativeMrzReaderProps>(ComponentName);

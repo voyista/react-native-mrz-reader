@@ -58,4 +58,31 @@ public class MRZScanResult {
         personalNumber = mrzResult.personalNumber
         personalNumber2 = mrzResult.personalNumber2
     }
+
+    fileprivate func dateFormatter(date: Date?) -> String {
+       let formatter = ISO8601DateFormatter()
+       return date != nil ? formatter.string(from: date!) : ""
+    }
+    
+    fileprivate func convertImageToBase64String (img: UIImage?) -> String {
+        return img != nil ? ( img!.jpegData(compressionQuality: 1)?.base64EncodedString() ?? "") : ""
+    }
+    
+    public func getMrzResultDictionary() -> [String : String]? {
+        return [
+            "documentImage": self.convertImageToBase64String(img: documentImage),
+            "personalNumber": personalNumber,
+            "documentType": documentType,
+            "countryCode": countryCode,
+            "surname": surnames,
+            "givenName": givenNames,
+            "documentNumber": documentNumber,
+            "nationalityCountryCode": nationalityCountryCode,
+            "birthdate": self.dateFormatter(date: birthdate),
+            "sex": sex ?? "-",
+            "expiryDate": self.dateFormatter(date: expiryDate),
+            "personalNumber": personalNumber,
+            "personalNumber2": personalNumber2 ?? ""
+        ]
+    }
 }

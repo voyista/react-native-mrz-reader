@@ -8,5 +8,6 @@
 // Module Functions
 RCT_EXTERN_METHOD(getCameraPermissionStatus:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject);
 RCT_EXTERN_METHOD(requestCameraPermission:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject);
+RCT_EXPORT_VIEW_PROPERTY(onMrzResult, RCTDirectEventBlock);
 
 @end

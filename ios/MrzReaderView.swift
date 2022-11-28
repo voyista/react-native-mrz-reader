@@ -1,20 +1,14 @@
-import Foundation
 import AVFoundation
 import SwiftyTesseract
 import QKMRZParser
 import AudioToolbox
 import Vision
-import SwiftUI
 
 enum DocumentType: String, CaseIterable {
    case passport = "P"
    case identityCard = "I"
 }
 
-// MARK: - MRZReaderViewDelegate
-public protocol MRZReaderViewDelegate: AnyObject {
-    func mrzScannerView(_ mrzScannerView: MrzReaderView, didFind scanResult: MRZScanResult)
-}
 // MARK: - MRZReaderView
 public class MrzReaderView : UIView {
     fileprivate let tesseract = SwiftyTesseract(language: .custom("ocrb"), dataSource: Bundle(for: MrzReaderView.self), engineMode: .tesseractOnly)
@@ -26,16 +20,18 @@ public class MrzReaderView : UIView {
     fileprivate let cutoutView = CutoutView()
     fileprivate var isScanningPaused = false
     fileprivate var observer: NSKeyValueObservation?
+    fileprivate var segmentedControl: UISegmentedControl?
     fileprivate var interfaceOrientation: UIInterfaceOrientation {
         return UIApplication.shared.statusBarOrientation
     }
-    @objc var items = ["Pasaportë", "Kartë ID"]
-    fileprivate var segmentedControl: UISegmentedControl?
     // MARK: Public properties
-    @objc public dynamic var isScanning = false
-    public var vibrateOnResult = true
-    public weak var delegate: MRZReaderViewDelegate?
-    
+    @objc var items = ["Pasaportë", "Kartë ID"]
+    @objc var isScanning = false
+    @objc var onMrzResult: RCTDirectEventBlock?
+    @objc var vibrateOnResult = true
+    @objc var passportLabel = "Skano faqen e fotos"
+    @objc var idCardLabel = "Skano faqen e pasme të kartës"
+    @objc var documentLabel = UILabel()
     public var cutoutRect: CGRect {
         return cutoutView.cutoutRect
     }
@@ -114,9 +110,12 @@ public class MrzReaderView : UIView {
     {
         if sender.selectedSegmentIndex == 1 {
             cutoutView.documentFrameRatio = CGFloat(1.58)
+            documentLabel.text = idCardLabel
         } else {
             cutoutView.documentFrameRatio = CGFloat(1.42)
+            documentLabel.text = passportLabel
         }
+        recalculateLabelPosition()
         cutoutView.setNeedsLayout()
     }
     
@@ -199,6 +198,7 @@ public class MrzReaderView : UIView {
         initCaptureSession()
         addAppObservers()
         addSegmentedControl()
+        addDocumentLabel()
     }
     
     fileprivate func setViewStyle() {
@@ -214,6 +214,18 @@ public class MrzReaderView : UIView {
             cutoutView.bottomAnchor.constraint(equalTo: bottomAnchor),
             cutoutView.leftAnchor.constraint(equalTo: leftAnchor),
             cutoutView.rightAnchor.constraint(equalTo: rightAnchor)
+        ])
+    }
+    
+    fileprivate func addDocumentLabel() {
+        documentLabel.translatesAutoresizingMaskIntoConstraints = false
+        documentLabel.text = passportLabel
+        documentLabel.font = UIFont.systemFont(ofSize: 14)
+
+        addSubview(documentLabel)
+        
+        NSLayoutConstraint.activate([
+            documentLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
         ])
     }
     
@@ -259,6 +271,22 @@ public class MrzReaderView : UIView {
         NotificationCenter.default.addObserver(self, selector: #selector(appWillEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
     }
     
+    fileprivate func recalculateLabelPosition() {
+        let (width, height): (CGFloat, CGFloat)
+
+        if bounds.height > bounds.width {
+            width = (bounds.width * 0.9)
+            height = (width / cutoutView.documentFrameRatio)
+        }
+        else {
+            height = (bounds.height * 0.75) // Fill 75% of the height
+        }
+
+        let topOffset = (bounds.height - height ) / 2
+        
+        documentLabel.frame.origin.y = topOffset - 20
+    }
+    
     // MARK: Misc
     fileprivate func adjustVideoPreviewLayerFrame() {
         videoOutput.connection(with: .video)?.videoOrientation = AVCaptureVideoOrientation(orientation: interfaceOrientation)
@@ -267,6 +295,7 @@ public class MrzReaderView : UIView {
         NSLayoutConstraint.activate([
             segmentedControl!.widthAnchor.constraint(equalToConstant: bounds.width * 0.6)
         ])
+        recalculateLabelPosition()
     }
     
     fileprivate func preprocessImage(_ image: CGImage) -> CGImage {
@@ -327,8 +356,11 @@ extension MrzReaderView: AVCaptureVideoDataOutputSampleBufferDelegate {
                     DispatchQueue.main.async {
                         let enlargedDocumentImage = self.enlargedDocumentImage(from: cgImage)
                         let scanResult = MRZScanResult(mrzResult: mrzResult, documentImage: enlargedDocumentImage)
-                        self.delegate?.mrzScannerView(self, didFind: scanResult)
-                        
+                        let scanResultDictionary = scanResult.getMrzResultDictionary()
+                        // Send result to jsi
+                        guard self.onMrzResult != nil else { return }
+                        self.onMrzResult!(scanResultDictionary)
+
                         if self.vibrateOnResult {
                             self.notificationFeedback.notificationOccurred(.success)
                         }
