@@ -71,18 +71,17 @@ public class MRZScanResult {
     public func getMrzResultDictionary() -> [String : String]? {
         return [
             "documentImage": self.convertImageToBase64String(img: documentImage),
+            "nationalityCountryCode": nationalityCountryCode,
+            "expiryDate": self.dateFormatter(date: expiryDate),
+            "birthdate": self.dateFormatter(date: birthdate),
+            "personalNumber2": personalNumber2 ?? "",
             "personalNumber": personalNumber,
+            "documentNumber": documentNumber,
             "documentType": documentType,
             "countryCode": countryCode,
-            "surname": surnames,
             "givenName": givenNames,
-            "documentNumber": documentNumber,
-            "nationalityCountryCode": nationalityCountryCode,
-            "birthdate": self.dateFormatter(date: birthdate),
-            "sex": sex ?? "-",
-            "expiryDate": self.dateFormatter(date: expiryDate),
-            "personalNumber": personalNumber,
-            "personalNumber2": personalNumber2 ?? ""
+            "surname": surnames,
+            "sex": sex ?? "-"
         ]
     }
 }
