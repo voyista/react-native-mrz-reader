@@ -1,4 +1,5 @@
 export interface MrzResult {
+  faceImage: string;
   documentImage: string;
   documentType: DocumentType;
   countryCode: string;
