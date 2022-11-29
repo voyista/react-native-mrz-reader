@@ -7,9 +7,9 @@ export interface MrzResult {
   givenName: string;
   documentNumber: string;
   nationalityCountryCode: string;
-  birthdate: Date;
+  birthdate: string;
   sex: Sex;
-  expiryDate: Date;
+  expiryDate: string;
   personalNumber: string;
   personalNumber2: string;
 }
