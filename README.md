@@ -1,4 +1,4 @@
-# r@better-network/react-native-mrz-reader
+# @better-network/react-native-mrz-reader
 
 React native library for reading Machine Readable Zone documents
 
@@ -6,6 +6,10 @@ React native library for reading Machine Readable Zone documents
 
 ```sh
 npm install @better-network/react-native-mrz-reader
+```
+
+```sh
+npx pod-install
 ```
 
 Since the library is using camera, you will need to add the camera usage description key into info.plist
