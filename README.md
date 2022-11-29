@@ -1,31 +1,30 @@
-# react-native-mrz-reader
+# r@better-network/react-native-mrz-reader
 
 React native library for reading Machine Readable Zone documents
 
 ## Installation
 
 ```sh
-npm install react-native-mrz-reader
+npm install @better-network/react-native-mrz-reader
+```
+
+Since the library is using camera, you will need to add the camera usage description key into info.plist
+
+```xml
+    <key>NSCameraUsageDescription</key>
+    <string>MRZ Reader needs access to your Camera for very obvious reasons.</string>
 ```
 
 ## Usage
 
 ```js
-import { MrzReaderView } from "react-native-mrz-reader";
-
+import { MrzReaderView, MrzResult } from '@better-network/react-native-mrz-reader';
 // ...
 
-<MrzReaderView color="tomato" />
+<MrzReaderView onMrzResult={(result: MrzResult) => {/* Here you get the result from the passport details */}} style={[StyleSheet.absoluteFill]} />
 ```
 
 ## Contributing
 
 See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
 
-## License
-
-MIT
-
----
-
-Made with [create-react-native-library](https://github.com/callstack/react-native-builder-bob)
