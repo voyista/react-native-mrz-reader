@@ -15,8 +15,8 @@ npx pod-install
 Since the library is using camera, you will need to add the camera usage description key into info.plist
 
 ```xml
-    <key>NSCameraUsageDescription</key>
-    <string>MRZ Reader needs access to your Camera for very obvious reasons.</string>
+<key>NSCameraUsageDescription</key>
+<string>MRZ Reader needs access to your Camera for very obvious reasons.</string>
 ```
 
 ## Usage
@@ -27,6 +27,11 @@ import { MrzReaderView, MrzResult } from '@better-network/react-native-mrz-reade
 
 <MrzReaderView onMrzResult={(result: MrzResult) => {/* Here you get the result from the passport details */}} style={[StyleSheet.absoluteFill]} />
 ```
+
+### Platform support roadmap
+
+- [x] IOS
+- [] Android
 
 ## Contributing
 
