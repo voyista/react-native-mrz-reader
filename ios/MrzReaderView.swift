@@ -21,17 +21,23 @@ public class MrzReaderView : UIView {
     fileprivate var isScanningPaused = false
     fileprivate var observer: NSKeyValueObservation?
     fileprivate var segmentedControl: UISegmentedControl?
+    fileprivate var videoDeviceInput: AVCaptureDeviceInput?
     fileprivate var interfaceOrientation: UIInterfaceOrientation {
         return UIApplication.shared.statusBarOrientation
     }
+    @objc private let cameraQueue = DispatchQueue(label: "camera_queue", qos: .userInteractive, attributes: [], autoreleaseFrequency: .inherit, target: nil)
     // MARK: Public properties
-    @objc var items = ["Pasaportë", "Kartë ID"]
-    @objc var isScanning = false
     @objc var onMrzResult: RCTDirectEventBlock?
+    @objc var onError: RCTDirectEventBlock?
+    @objc var isScanning = false
     @objc var vibrateOnResult = true
+    
+    @objc var items = ["Pasaportë", "Kartë ID"]
     @objc var passportLabel = "Skano faqen e fotos"
     @objc var idCardLabel = "Skano faqen e pasme të kartës"
     @objc var documentLabel = UILabel()
+    @objc var torch = "off"
+    
     public var cutoutRect: CGRect {
         return cutoutView.cutoutRect
     }
@@ -60,6 +66,39 @@ public class MrzReaderView : UIView {
     override public func layoutSubviews() {
         super.layoutSubviews()
         adjustVideoPreviewLayerFrame()
+    }
+    
+    override public final func didSetProps(_ changedProps: [String]!) {
+        let shouldUpdateTorch = changedProps.contains("torch")
+        let shouldUpdateScanning = changedProps.contains("isScanning")
+        
+        cameraQueue.async {
+            if shouldUpdateTorch {
+                self.cameraQueue.asyncAfter(deadline: .now() + 0.1) {
+                    self.setTorchMode(self.torch)
+                }
+            }
+            
+            if shouldUpdateScanning {
+                self.changeScanningStatus(isScanning: self.isScanning)
+            }
+            
+        }
+        
+    }
+    
+    private func changeScanningStatus(isScanning: Bool) {
+        if self.captureSession.isRunning != self.isScanning {
+            if self.isScanning {
+                ReactLogger.log(level: .info, message: "Starting Session...")
+                self.startScanning()
+                ReactLogger.log(level: .info, message: "Started Session!")
+            } else {
+                ReactLogger.log(level: .info, message: "Stopping Session...")
+                self.stopScanning()
+                ReactLogger.log(level: .info, message: "Stopped Session!")
+            }
+        }
     }
     
     // MARK: Scanning
@@ -242,6 +281,8 @@ public class MrzReaderView : UIView {
             return
         }
         
+        videoDeviceInput = deviceInput
+        
         observer = captureSession.observe(\.isRunning, options: [.new]) { [unowned self] (model, change) in
             // CaptureSession is started from the global queue (background). Change the `isScanning` on the main
             // queue to avoid triggering the change handler also from the global queue as it may affect the UI.
@@ -317,6 +358,66 @@ public class MrzReaderView : UIView {
             .applyingFilter("LuminanceThresholdFilter", parameters: ["inputThreshold": threshold])
         
         return CIContext.shared.createCGImage(inputImage, from: inputImage.extent)!
+    }
+    
+    internal final func setTorchMode(_ torchMode: String) {
+        guard let device = videoDeviceInput?.device else {
+          invokeOnError(.session(.cameraNotReady))
+          return
+        }
+        guard var torchMode = AVCaptureDevice.TorchMode(withString: torchMode) else {
+          invokeOnError(.parameter(.invalid(unionName: "TorchMode", receivedValue: torch)))
+          return
+        }
+        if !captureSession.isRunning {
+          torchMode = .off
+        }
+        if device.torchMode == torchMode {
+          // no need to run the whole lock/unlock bs
+          return
+        }
+        if !device.hasTorch || !device.isTorchAvailable {
+          if torchMode == .off {
+            // ignore it, when it's off and not supported, it's off.
+            return
+          } else {
+            // torch mode is .auto or .on, but no torch is available.
+            invokeOnError(.device(.torchUnavailable))
+            return
+          }
+        }
+        do {
+          try device.lockForConfiguration()
+          device.torchMode = torchMode
+          if torchMode == .on {
+            try device.setTorchModeOn(level: 1.0)
+          }
+          device.unlockForConfiguration()
+        } catch let error as NSError {
+          invokeOnError(.device(.configureError), cause: error)
+          return
+        }
+      }
+    
+    // pragma MARK: Event Invokers
+    internal final func invokeOnError(_ error: CameraError, cause: NSError? = nil) {
+      ReactLogger.log(level: .error, message: "Invoking onError(): \(error.message)")
+      guard let onError = onError else { return }
+
+      var causeDictionary: [String: Any]?
+      if let cause = cause {
+        causeDictionary = [
+          "code": cause.code,
+          "domain": cause.domain,
+          "message": cause.description,
+          "details": cause.userInfo,
+        ]
+      }
+      onError([
+        "code": error.code,
+        "message": error.message,
+        "cause": causeDictionary ?? NSNull(),
+      ])
     }
 }
 

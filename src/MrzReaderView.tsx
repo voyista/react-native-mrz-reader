@@ -5,12 +5,15 @@ import {
   NativeSyntheticEvent,
   requireNativeComponent,
 } from 'react-native';
-import { tryParseNativeCameraError } from './CameraError';
+import { OnErrorEvent, tryParseNativeCameraError, isErrorWithCause } from '.';
 import type { MrzReaderProps } from './MrzReaderProps';
 import type { MrzResult } from './MrzResult';
 
-type NativeMrzReaderProps = Omit<MrzReaderProps, 'onMrzResult'> & {
-  onMrzResult: (event: NativeSyntheticEvent<MrzResult>) => void;
+type NativeMrzReaderProps = Omit<MrzReaderProps, 'onMrzResult' | 'onError'> & {
+  torch?: 'on' | 'off';
+  isScanning?: boolean;
+  onMrzResult?: (event: NativeSyntheticEvent<MrzResult>) => void;
+  onError?: (event: NativeSyntheticEvent<OnErrorEvent>) => void;
 };
 type RefType = React.Component<NativeMrzReaderProps> & Readonly<NativeMethods>;
 export type CameraPermissionStatus =
@@ -35,6 +38,7 @@ export class MrzReaderView extends React.PureComponent<MrzReaderProps> {
   constructor(props: MrzReaderProps) {
     super(props);
     this.ref = React.createRef<RefType>();
+    this.onError = this.onError.bind(this);
     this.onMrzResult = this.onMrzResult.bind(this);
   }
 
@@ -42,7 +46,7 @@ export class MrzReaderView extends React.PureComponent<MrzReaderProps> {
    * Gets the current Camera Permission Status. Check this before mounting the Camera to ensure
    * the user has permitted the app to use the camera.
    *
-   * To actually prompt the user for camera permission, use {@linkcode Camera.requestCameraPermission | requestCameraPermission()}.
+   * To actually prompt the user for camera permission, use {@linkcode MrzReaderView.requestCameraPermission | requestCameraPermission()}.
    *
    * @throws {@linkcode CameraRuntimeError} When any kind of error occured while getting the current permission status. Use the {@linkcode CameraRuntimeError.code | code} property to get the actual error
    */
@@ -74,6 +78,17 @@ export class MrzReaderView extends React.PureComponent<MrzReaderProps> {
       this.props.onMrzResult(event.nativeEvent);
   }
 
+  private onError(event: NativeSyntheticEvent<OnErrorEvent>): void {
+    if (this.props.onError != null) {
+      const error = event.nativeEvent;
+      const cause = isErrorWithCause(error.cause) ? error.cause : undefined;
+      this.props.onError(
+        // @ts-expect-error
+        new CameraRuntimeError(error.code, error.message, cause)
+      );
+    }
+  }
+
   /** @internal */
   public render(): React.ReactNode {
     const { ...props } = this.props;
@@ -81,6 +96,7 @@ export class MrzReaderView extends React.PureComponent<MrzReaderProps> {
       <NativeMrzReaderView
         {...props}
         ref={this.ref}
+        onError={this.onError}
         onMrzResult={this.onMrzResult}
       />
     );
