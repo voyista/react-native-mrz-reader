@@ -32,8 +32,8 @@ public class MrzReaderView : UIView {
     @objc var isScanning = false
     @objc var vibrateOnResult = true
     
-    @objc var items = ["Pasaportë", "Kartë ID"]
-    @objc var passportLabel = "Skano faqen e fotos"
+    @objc var items = ["Passport"]
+    @objc var passportLabel = "Align the Photo Page of Your Passport in the Box"
     @objc var idCardLabel = "Skano faqen e pasme të kartës"
     @objc var documentLabel = UILabel()
     @objc var torch = "off"
